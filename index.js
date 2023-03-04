@@ -39,3 +39,7 @@ function solveQuadraticEquation(a, b, c) {
     console.log(`There are 2 roots\nx1 = ${x1.toFixed(3)}\nx2 = ${x2.toFixed(3)}`)
   }
 }
+
+function checkFormat(data) {
+  return /^-?\d(\.\d+)?\s-?\d(\.\d+)?\s-?\d(\.\d+)?$/.test(data)
+}
