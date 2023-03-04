@@ -1,3 +1,29 @@
+const fs = require("fs")
+const path = require("path")
+
+
+function nonInteractiveMode() {
+  if (!fs.existsSync(path.resolve(__dirname, filePath))) {
+    console.log(`file ${filePath} does not exist`)
+    return
+  } else {
+    fs.readFile(path.resolve(__dirname, filePath), "utf-8", (err, data) => {
+      if (err) throw err
+      if (!checkFormat(data)) {
+        console.log("invalid file format")
+        return
+      } else {
+        const [a, b, c] = data.split(' ').map(elem => +elem)
+        if (a === 0) {
+          console.log("Error. a cannot be 0")
+          return
+        }
+        solveQuadraticEquation(a, b, c)
+      }
+    })
+  }
+}
+
 function solveQuadraticEquation(a, b, c) {
   console.log(`Equation is: (${a}) x^2 + (${b}) x + (${c}) = 0`)
   const desc = (b ** 2) - 4 * a * c
