@@ -1,6 +1,7 @@
 const fs = require("fs")
 const path = require("path")
 
+const filePath = process.argv[2]
 
 function nonInteractiveMode() {
   if (!fs.existsSync(path.resolve(__dirname, filePath))) {
@@ -22,6 +23,34 @@ function nonInteractiveMode() {
       }
     })
   }
+}
+
+function interactiveMode() {
+  function ask(i) {
+    process.stdout.write(questions[i])
+  }
+  const questions = ["Input a: ", "Input b: ", "Input c: "]
+  const params = []
+  process.stdout.write(questions[0])
+  process.stdin.on("data", (data) => {
+    if (params.length < questions.length) {
+      if (!isNum(data)) {
+        console.log(`Error. Expected a valid real number, got ${data.toString().trim()} instead`);
+        ask(params.length)
+      } else if (data.toString().trim() == 0 && params.length == 0) {
+        console.log(`Error. a cannot be 0`);
+        ask(params.length)
+      } else {
+        params.push(+data.toString().trim())
+        if (params.length < questions.length) {
+          ask(params.length)
+        } else {
+          solveQuadraticEquation(...params)
+          process.exit()
+        }
+      }
+    }
+  })
 }
 
 function solveQuadraticEquation(a, b, c) {
