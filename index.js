@@ -69,6 +69,15 @@ function solveQuadraticEquation(a, b, c) {
   }
 }
 
+function isNum(arg) {
+  const num = parseFloat(arg.toString().trim())
+  if (isNaN(num)) {
+    return false
+  } else {
+    return true
+  }
+}
+
 function checkFormat(data) {
   return /^-?\d(\.\d+)?\s-?\d(\.\d+)?\s-?\d(\.\d+)?$/.test(data)
 }
