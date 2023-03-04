@@ -3,6 +3,12 @@ const path = require("path")
 
 const filePath = process.argv[2]
 
+if (filePath) {
+  nonInteractiveMode()
+} else {
+  interactiveMode()
+}
+
 function nonInteractiveMode() {
   if (!fs.existsSync(path.resolve(__dirname, filePath))) {
     console.log(`file ${filePath} does not exist`)
