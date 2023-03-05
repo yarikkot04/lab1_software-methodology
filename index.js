@@ -37,7 +37,7 @@ function interactiveMode() {
   }
   const questions = ["Input a: ", "Input b: ", "Input c: "]
   const params = []
-  process.stdout.write(questions[0])
+  ask(0)
   process.stdin.on("data", (data) => {
     if (params.length < questions.length) {
       if (!isNum(data)) {
